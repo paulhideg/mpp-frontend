@@ -35,15 +35,6 @@ export default function Home() {
     setYearData(chartData);
   }, [students]);
 
-  // set configurations for the API call here
-  const configuration = {
-    method: "get",
-    url: "https://mpp-backend-84d39319a931.herokuapp.com/get/students",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-
   // logout
   const logout = () => {
     // destroy the cookie
@@ -63,6 +54,14 @@ export default function Home() {
     // Initial check
     handleConnectivityChange();
     if (students.length === 0) {
+      // set configurations for the API call here
+      const configuration = {
+        method: "get",
+        url: "https://mpp-backend-84d39319a931.herokuapp.com/get/students",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
       axios(configuration) // Spring CRUD API
         .then((response) => {
           setStudents(response.data.students);
